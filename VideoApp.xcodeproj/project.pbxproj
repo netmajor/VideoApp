@@ -15,7 +15,6 @@
 		DE710B6D1F76EDBA00F900FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE710B6B1F76EDBA00F900FA /* LaunchScreen.storyboard */; };
 		DE710B781F76EDBA00F900FA /* VideoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE710B771F76EDBA00F900FA /* VideoAppTests.swift */; };
 		DE710B831F76EDBA00F900FA /* VideoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE710B821F76EDBA00F900FA /* VideoAppUITests.swift */; };
-		DE710B911F76F1CF00F900FA /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE710B901F76F1CF00F900FA /* MyCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 		DE710B7E1F76EDBA00F900FA /* VideoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE710B821F76EDBA00F900FA /* VideoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAppUITests.swift; sourceTree = "<group>"; };
 		DE710B841F76EDBA00F900FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DE710B901F76F1CF00F900FA /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +106,6 @@
 				DE710B691F76EDBA00F900FA /* Assets.xcassets */,
 				DE710B6B1F76EDBA00F900FA /* LaunchScreen.storyboard */,
 				DE710B6E1F76EDBA00F900FA /* Info.plist */,
-				DE710B901F76F1CF00F900FA /* MyCollectionViewCell.swift */,
 			);
 			path = VideoApp;
 			sourceTree = "<group>";
@@ -267,7 +264,6 @@
 			files = (
 				DE710B651F76EDBA00F900FA /* SecondViewController.swift in Sources */,
 				DE710B611F76EDBA00F900FA /* AppDelegate.swift in Sources */,
-				DE710B911F76F1CF00F900FA /* MyCollectionViewCell.swift in Sources */,
 				DE710B631F76EDBA00F900FA /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
