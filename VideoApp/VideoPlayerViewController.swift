@@ -1,23 +1,30 @@
 //
-//  SecondViewController.swift
+//  VideoPlayerViewController.swift
 //  VideoApp
 //
-//  Created by Lukasz Bartczak on 23.09.2017.
+//  Created by Lukasz Bartczak on 03.10.2017.
 //  Copyright © 2017 Lukasz Bartczak. All rights reserved.
 //
 
-import UIKit
+import AVFoundation
+import AVKit
+import Photos
 
-class SecondViewController: UIViewController {
 
+class VideoPlayerViewController: AVPlayerViewController {    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+   
+    
 }
+
 

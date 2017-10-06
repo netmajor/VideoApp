@@ -9,10 +9,13 @@
 import UIKit
 import Photos
 
-class FirstViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
+class VideosViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
     
     var uiImageArray : [UIImage] = []
+    var assestArray : PHFetchResult<PHAsset>!
+    var assetToNav: Int!
+
 
     // MARK: - UICollectionViewDataSource protocol
     
@@ -51,14 +54,18 @@ class FirstViewController: UICollectionViewController,UICollectionViewDelegateFl
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
+        self.assetToNav = indexPath.item
+        let data = self.assestArray[self.assetToNav]
+        
+        self.playVideo(view: self, videoAsset: data)
     }
     
     fileprivate func getAssets() {
         let options = PHFetchOptions()
         options.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: true) ]
-        options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-        let assets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: options)
-        assets.enumerateObjects { (obj, idx, bool) -> Void in
+        options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
+        assestArray = PHAsset.fetchAssets(with: PHAssetMediaType.video, options: options)
+        assestArray.enumerateObjects { (obj, idx, bool) -> Void in
             self.uiImageArray.append(self.getAssetThumbnail(asset: obj))
         }
     }
@@ -92,7 +99,26 @@ class FirstViewController: UICollectionViewController,UICollectionViewDelegateFl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    func playVideo (view: UIViewController, videoAsset: PHAsset) {
+        
+        guard (videoAsset.mediaType == .video) else {
+            print("Not a valid video media type")
+            return
+        }
+        
+        PHCachingImageManager().requestAVAsset(forVideo: videoAsset, options: nil) { (asset, audioMix, args) in
+            let asset = asset as! AVURLAsset
+            
+            DispatchQueue.main.async {
+                let player = AVPlayer(url: asset.url)
+                let playerViewController = VideoPlayerViewController()
+                playerViewController.player = player
+                view.present(playerViewController, animated: true) {
+                    playerViewController.player!.play()
+                }
+            }
+        }
+    }
 }
 

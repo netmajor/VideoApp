@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		DE710B611F76EDBA00F900FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE710B601F76EDBA00F900FA /* AppDelegate.swift */; };
-		DE710B631F76EDBA00F900FA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE710B621F76EDBA00F900FA /* FirstViewController.swift */; };
+		DE710B631F76EDBA00F900FA /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE710B621F76EDBA00F900FA /* VideosViewController.swift */; };
 		DE710B651F76EDBA00F900FA /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE710B641F76EDBA00F900FA /* SecondViewController.swift */; };
 		DE710B681F76EDBA00F900FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE710B661F76EDBA00F900FA /* Main.storyboard */; };
 		DE710B6A1F76EDBA00F900FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE710B691F76EDBA00F900FA /* Assets.xcassets */; };
 		DE710B6D1F76EDBA00F900FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE710B6B1F76EDBA00F900FA /* LaunchScreen.storyboard */; };
 		DE710B781F76EDBA00F900FA /* VideoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE710B771F76EDBA00F900FA /* VideoAppTests.swift */; };
 		DE710B831F76EDBA00F900FA /* VideoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE710B821F76EDBA00F900FA /* VideoAppUITests.swift */; };
+		DEFB34481F841D99001A1876 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFB34471F841D99001A1876 /* VideoPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,7 @@
 /* Begin PBXFileReference section */
 		DE710B5D1F76EDBA00F900FA /* VideoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE710B601F76EDBA00F900FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DE710B621F76EDBA00F900FA /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		DE710B621F76EDBA00F900FA /* VideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
 		DE710B641F76EDBA00F900FA /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		DE710B671F76EDBA00F900FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE710B691F76EDBA00F900FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		DE710B7E1F76EDBA00F900FA /* VideoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE710B821F76EDBA00F900FA /* VideoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAppUITests.swift; sourceTree = "<group>"; };
 		DE710B841F76EDBA00F900FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEFB34471F841D99001A1876 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +101,14 @@
 		DE710B5F1F76EDBA00F900FA /* VideoApp */ = {
 			isa = PBXGroup;
 			children = (
+				DE710B6E1F76EDBA00F900FA /* Info.plist */,
 				DE710B601F76EDBA00F900FA /* AppDelegate.swift */,
-				DE710B621F76EDBA00F900FA /* FirstViewController.swift */,
 				DE710B641F76EDBA00F900FA /* SecondViewController.swift */,
-				DE710B661F76EDBA00F900FA /* Main.storyboard */,
+				DE710B621F76EDBA00F900FA /* VideosViewController.swift */,
 				DE710B691F76EDBA00F900FA /* Assets.xcassets */,
 				DE710B6B1F76EDBA00F900FA /* LaunchScreen.storyboard */,
-				DE710B6E1F76EDBA00F900FA /* Info.plist */,
+				DE710B661F76EDBA00F900FA /* Main.storyboard */,
+				DEFB34471F841D99001A1876 /* VideoPlayerViewController.swift */,
 			);
 			path = VideoApp;
 			sourceTree = "<group>";
@@ -264,7 +267,8 @@
 			files = (
 				DE710B651F76EDBA00F900FA /* SecondViewController.swift in Sources */,
 				DE710B611F76EDBA00F900FA /* AppDelegate.swift in Sources */,
-				DE710B631F76EDBA00F900FA /* FirstViewController.swift in Sources */,
+				DEFB34481F841D99001A1876 /* VideoPlayerViewController.swift in Sources */,
+				DE710B631F76EDBA00F900FA /* VideosViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
