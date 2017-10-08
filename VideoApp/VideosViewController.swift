@@ -12,9 +12,11 @@ import Photos
 class VideosViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
     
-    var uiImageArray : [UIImage] = []
-    var assestArray : PHFetchResult<PHAsset>!
-    var assetToNav: Int!
+    var fetchResult : PHFetchResult<PHAsset>!
+    var assets = [PHAsset]()
+    lazy var imageManager = {
+        return PHCachingImageManager()
+    }()
 
 
     // MARK: - UICollectionViewDataSource protocol
@@ -29,7 +31,7 @@ class VideosViewController: UICollectionViewController,UICollectionViewDelegateF
     
     // tell the collection view how many cells to make
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return uiImageArray.count
+        return assets.count
     }
     
     // make a cell for each cell index path
@@ -38,14 +40,14 @@ class VideosViewController: UICollectionViewController,UICollectionViewDelegateF
         // get a reference to our storyboard cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath)
         cell.backgroundColor = UIColor.red
-        
-        // Use the outlet in our custom class to get a reference to the UILabel in the cell
-        let imageView = UIImageView(frame: CGRect(x:0, y:0, width:cell.frame.size.width, height:cell.frame.size.height))
-        let image = uiImageArray[indexPath.row]
-        imageView.image = image
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
-        
-        cell.addSubview(imageView)
+
+        imageManager.requestImage(for: assets[indexPath.row], targetSize: CGSize(width: 150.0, height: 150.0), contentMode: .default, options: nil, resultHandler: { (image, info) in
+            let imageView = UIImageView(frame: CGRect(x:0, y:0, width:cell.frame.size.width, height:cell.frame.size.height))
+            imageView.image = image
+            imageView.contentMode = UIViewContentMode.scaleAspectFit
+            cell.addSubview(imageView)
+
+        })
         return cell
     }
     
@@ -54,8 +56,7 @@ class VideosViewController: UICollectionViewController,UICollectionViewDelegateF
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
-        self.assetToNav = indexPath.item
-        let data = self.assestArray[self.assetToNav]
+        let data = self.assets[indexPath.item]
         
         self.playVideo(view: self, videoAsset: data)
     }
@@ -64,10 +65,10 @@ class VideosViewController: UICollectionViewController,UICollectionViewDelegateF
         let options = PHFetchOptions()
         options.sortDescriptors = [ NSSortDescriptor(key: "creationDate", ascending: true) ]
         options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
-        assestArray = PHAsset.fetchAssets(with: PHAssetMediaType.video, options: options)
-        assestArray.enumerateObjects { (obj, idx, bool) -> Void in
-            self.uiImageArray.append(self.getAssetThumbnail(asset: obj))
-        }
+        fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.video, options: options)
+        fetchResult.enumerateObjects({(asset, index, stop) in
+            self.assets.append(asset)
+                        })
     }
     
     override func viewDidLoad() {
@@ -78,21 +79,19 @@ class VideosViewController: UICollectionViewController,UICollectionViewDelegateF
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView?.dataSource = self
         getAssets()
+        let imageRequestOptions = PHImageRequestOptions()
+        imageRequestOptions.isSynchronous = false
+        imageRequestOptions.resizeMode = .exact
+        imageRequestOptions.deliveryMode = .highQualityFormat
+        imageRequestOptions.version = .current
+        imageRequestOptions.isNetworkAccessAllowed = false
+
+        self.imageManager.startCachingImages(for: assets, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: imageRequestOptions)
+
         /*
         var cameraRollAssets = results.filteredArrayUsingPredicate(NSPredicate(format: "assetSource == %@", argumentArray: [3]))
         results = NSMutableArray(array: cameraRollAssets)*/
         // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-   fileprivate func getAssetThumbnail(asset: PHAsset) -> UIImage {
-        let manager = PHImageManager.default()
-        let option = PHImageRequestOptions()
-        var thumbnail = UIImage()
-        option.isSynchronous = true
-        manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: option, resultHandler: {(result, info)->Void in
-            thumbnail = result!
-        })
-        return thumbnail
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,7 +106,7 @@ class VideosViewController: UICollectionViewController,UICollectionViewDelegateF
             return
         }
         
-        PHCachingImageManager().requestAVAsset(forVideo: videoAsset, options: nil) { (asset, audioMix, args) in
+        imageManager.requestAVAsset(forVideo: videoAsset, options: nil) { (asset, audioMix, args) in
             let asset = asset as! AVURLAsset
             
             DispatchQueue.main.async {
